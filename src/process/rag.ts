@@ -10,4 +10,11 @@ const uploadFile = async (formData: FormData) => {
     return { data }
 }
 
-export { uploadFile }
+const sendMessage = async (question: string): Promise<{ data: { answer: string } }> => {
+    const { data } = await client.post(`/chat?question=${question}`)
+
+    return { data }
+}
+
+export { sendMessage, uploadFile }
+
