@@ -9,7 +9,7 @@ interface TextAreaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement
     required?: boolean;
     maxLength?: number;
     containerClassName?: string;
-    onSubmitFunction?: () => void;
+    onSubmitFunction?: (value: string) => void;
     showCount?: boolean;
     numberOfLines?: number;
     maxNumberOfLines?: number;
