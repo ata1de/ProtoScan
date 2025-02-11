@@ -60,7 +60,7 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
         );
 
         return (
-            <div className={clsx('flex flex-col gap-2', disabled ? 'bg-gray-100 ' : '')}>
+            <div className={clsx('flex flex-col', disabled ? 'bg-gray-100' : '')}>
                 {label && (
                     <p className="text-gray-800 text-sm">
                         {label}

@@ -13,7 +13,7 @@ export function ResponseAi({ message, response, isLoading, start }: ResponseAiPr
       <div className="flex flex-col space-y-4">
         <div className="flex justify-start w-full mt-8">
             {start && (
-                <div className="bg-blue-800 rounded-xl p-4 max-w-[70%]">
+                <div className="bg-blue-800 rounded-xl p-4 ml-2 max-w-[70%]">
                     <p className="text-gray-200 text-sm whitespace-pre-wrap break-words">{message}</p>
                 </div>
             )}
@@ -24,7 +24,7 @@ export function ResponseAi({ message, response, isLoading, start }: ResponseAiPr
                 <Skeleton className="h-[80px] w-full max-w-[70%] rounded-xl" />
             ) : (
                 response && (
-                    <div className="bg-blue-800 rounded-xl p-4 max-w-[70%] ml-auto">
+                    <div className="bg-blue-800 rounded-xl mr-2 p-4 max-w-[70%] ml-auto">
                         <p className="text-gray-200 text-sm whitespace-pre-wrap break-words">{response}</p>
                     </div>
             )
