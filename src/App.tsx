@@ -36,8 +36,8 @@ function App() {
   return (
     <div className="flex flex-col w-full h-screen justify-center items-center ">
       <div className={clsx(
-        'flex flex-col w-[40%] h-full justify-center items-center border-2 border-gray-100',
-        !isAllowedToSend ? 'border-none' : ''
+        'flex flex-col w-[40%] h-full justify-center items-center border-2 border-blue-100',
+        !isAllowedToSend ? 'border-none mb-4' : ' rounded-2xl my-4'
       )}>
         {!isAllowedToSend ? (
           <div className="w-full max-w-2xl mt-8 rounded-lg shadow-lg p-8 flex items-center justify-center">
@@ -47,7 +47,7 @@ function App() {
           <ResponseAi message={request} response={response} isLoading={isPending} start={start} />
         )}
 
-        <footer className="my-4 w-full mt-auto">
+        <footer className="w-full mt-auto">
           <TextArea
             value={start ? '' : request}
             onChange={(e) => {setRequest(e.target.value)}}
