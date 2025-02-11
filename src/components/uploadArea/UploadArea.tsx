@@ -4,7 +4,7 @@ import { useMutation } from '@tanstack/react-query';
 import { CloudUpload, File, Trash } from 'lucide-react';
 import { ChangeEvent, useState } from 'react';
 
-export function UploadArea() {
+export function UploadArea({ setIsAllowedToSend }: { setIsAllowedToSend: (isAllowed: boolean) => void }) {
   const [file, setFile] = useState<File | null>(null);
 
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -22,9 +22,11 @@ export function UploadArea() {
   }
 
   const { mutate, isPending } = useMutation({
+    mutationKey: ['files'],
     mutationFn: handleUploadFiles,
     onSuccess: () => {
       successToast('Arquivo enviado com sucesso');
+      setIsAllowedToSend(true);
       setFile(null);
     },
     onError: () => {
