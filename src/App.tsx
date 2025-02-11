@@ -1,14 +1,14 @@
+import { ResponseAi, TextArea, UploadArea } from '@/components';
+import { sendMessage } from '@/process/rag';
+import { errorToast, successToast } from '@/utils/toast';
 import { useMutation } from '@tanstack/react-query';
 import clsx from 'clsx';
 import { Send } from 'lucide-react';
 import { useState } from 'react';
-import { ResponseAi, TextArea, UploadArea } from './components';
-import { sendMessage } from './process/rag';
-import { errorToast, successToast } from './utils/toast';
-
 
 function App() {
   const [isAllowedToSend, setIsAllowedToSend] = useState(false);
+  const [start, setStart] = useState(false);
   const [request, setRequest] = useState('')
   const [response, setResponse] = useState('')
 
@@ -25,9 +25,11 @@ function App() {
       successToast('Message enviada com sucesso');
     },
     onError: () => {
-      errorToast('Erro ao enviar mensagem');
-      setRequest('')
-      setResponse('')
+        errorToast('Erro ao enviar mensagem');
+        setIsAllowedToSend(false)
+        setRequest('')
+        setResponse('')
+        setStart(false)
     }
   });
 
@@ -42,15 +44,18 @@ function App() {
             <UploadArea setIsAllowedToSend={setIsAllowedToSend}/>
           </div>
         ) : (
-          <ResponseAi message={request} response={response} />
+          <ResponseAi message={request} response={response} isLoading={isPending} start={start} />
         )}
 
         <footer className="my-4 w-full mt-auto">
           <TextArea
-            value={request}
+            value={start ? '' : request}
+            onChange={(e) => {setRequest(e.target.value)}}
             disabled={!isAllowedToSend || isPending}
-            onSubmitFunction={() => mutate(request)}
-            onChange={(e) => setRequest(e.target.value)}
+            onSubmitFunction={(value) => {
+              setStart(true)
+              mutate(value)
+            }}
             placeholder="Escreva sua mensagem sobre o protocolo..."
             iconRight={<Send size={20} color="blue" />}
           />

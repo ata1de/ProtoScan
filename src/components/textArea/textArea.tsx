@@ -94,7 +94,7 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
                         <Button
                             type="button"
                             disabled={iconDisabled}
-                            onClick={onSubmitFunction}
+                            onClick={() => onSubmitFunction?.(value?.toString() || '')}
                             className={cn(
                                 'flex mt-auto bg-transparent border-none shadow-none hover:bg-white justify-center w-8 h-8',
                                 disabled ? 'cursor-not-allowed hover:bg-transparent' : 'cursor-pointer'
